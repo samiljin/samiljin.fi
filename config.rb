@@ -47,6 +47,8 @@
 #   end
 # end
 
+set :fonts_dir, 'assets/fonts/'
+
 set :css_dir, 'stylesheets'
 
 set :js_dir, 'javascripts'
