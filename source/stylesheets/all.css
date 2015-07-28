@@ -53,3 +53,8 @@ div#terminal-wrapper {
   -moz-box-shadow: none;
   box-shadow: none;
 }
+
+.response {
+  width: 100%;
+  color: green;
+}

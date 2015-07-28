@@ -7,10 +7,20 @@ var Line = React.createClass({
       var disabled = true
     }
 
+    var classNames = "line";
+    var startingMarker;
+
+    if (this.props.content == undefined) {
+      startingMarker = <span> {">"} </span>;
+    } else {
+      classNames += " response";
+    }
+
     return (
       <span>
-        <span> {">"} </span>
-        <input ref="line" className='line' onKeyPress={this.props.onKeyPress} disabled={disabled} />
+        {startingMarker}
+        <input ref="line" className={classNames} onKeyPress={this.props.onKeyPress}
+          disabled={disabled} value={this.props.content} />
       </span>
     );
   }
@@ -25,8 +35,19 @@ var Terminal = React.createClass({
   handleTyping: function(event) {
     if (event.charCode == 13) {
       var lines = this.props.lines
-      lines.push(<Line />)
-      this.setProps({lines: lines}, function() {});
+
+      if (event.target.value == "") {
+        lines.push(<Line />)
+      } else {
+        var inputHandler = new InputHandler();
+
+        var response = inputHandler.responseTo(event.target.value)
+
+        lines.push(<Line content={response} />)
+        lines.push(<Line />)
+      }
+
+      this.setProps({lines: lines});
     }
   },
 
