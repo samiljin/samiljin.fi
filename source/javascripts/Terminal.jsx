@@ -7,20 +7,22 @@ var Line = React.createClass({
       var disabled = true
     }
 
-    var classNames = "line";
-    var startingMarker;
+    var line;
 
-    if (this.props.content == undefined) {
-      startingMarker = <span> {">"} </span>;
+    if (this.props.response == undefined) {
+      line = <span>
+              <span> {">"} </span>
+              <input ref="line" className='line' onKeyPress={this.props.onKeyPress} disabled={disabled} value={this.props.content} />
+            </span>
     } else {
-      classNames += " response";
+      line = <span>
+               <div className="line response"> {this.props.content} </div>
+             </span>
     }
 
     return (
       <span>
-        {startingMarker}
-        <input ref="line" className={classNames} onKeyPress={this.props.onKeyPress}
-          disabled={disabled} value={this.props.content} />
+        {line}
       </span>
     );
   }
@@ -43,7 +45,7 @@ var Terminal = React.createClass({
 
         var response = inputHandler.responseTo(event.target.value)
 
-        lines.push(<Line content={response} />)
+        lines.push(<Line response={true} content={response} />)
         lines.push(<Line />)
       }
 

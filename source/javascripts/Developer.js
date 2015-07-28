@@ -16,5 +16,5 @@ Developer.prototype.full_name = function () {
 };
 
 Developer.prototype.twitter = function () {
-  return '"https://twitter.com/samiljin"'
+  return '<a href="https://twitter.com/samiljin"> https://twitter.com/samiljin </a>'
 };

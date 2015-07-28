@@ -57,4 +57,5 @@ div#terminal-wrapper {
 .response {
   width: 100%;
   color: green;
+  margin-top: 2px;
 }
