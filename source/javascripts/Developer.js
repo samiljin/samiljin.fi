@@ -1,6 +1,6 @@
-function Developer() {
-  this.firstName = "Sami";
-  this.lastName  = "Iljin";
+function Developer(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName  = lastName;
 }
 
 Developer.prototype.first_name = function () {
@@ -12,7 +12,7 @@ Developer.prototype.last_name = function () {
 };
 
 Developer.prototype.full_name = function () {
-  return '"' + this.firstName + ' Johannes ' + this.lastName + '"';
+  return '"' + this.firstName + ' ' + this.middleName + ' ' + this.lastName + '"';
 };
 
 Developer.prototype.twitter = function () {

@@ -1,14 +1,15 @@
 function InputHandler() {
-  this.samiljin = new Developer();
-}
+  this.samiljin = new Developer("Sami", "Iljin");
 
-InputHandler.prototype.responseTo = function (command) {
-  var samiljin = this.samiljin
+  this.responseTo = function(command) {
+    var samiljin        = this.samiljin;
+    samiljin.middleName = "Johannes";
 
-  try {
-    var response = eval(command + "()")
-    return response
-  } catch (e) {
-    return "Unknown command: '" + command + "'";
+    try {
+      var response = eval(command + "()");
+      return response;
+    } catch (e) {
+      return "Unknown command: '" + command + "'";
+    }
   }
-};
+}
