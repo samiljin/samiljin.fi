@@ -16,5 +16,10 @@ Developer.prototype.full_name = function () {
 };
 
 Developer.prototype.twitter = function () {
-  return '<a href="https://twitter.com/samiljin"> https://twitter.com/samiljin </a>'
+  return '<a href="https://twitter.com/samiljin" target="_blank"> https://twitter.com/samiljin </a>'
+};
+
+// TODO: Print all available methods
+Developer.prototype.methods = function () {
+  console.log(this.__proto__);
 };

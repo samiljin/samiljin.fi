@@ -59,3 +59,7 @@ div#terminal-wrapper {
   color: green;
   margin-top: 2px;
 }
+
+a {
+  color: green;
+}
