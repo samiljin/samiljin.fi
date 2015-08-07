@@ -8,9 +8,24 @@ var Terminal = React.createClass({
     return { lines: [<Line />], givenCommands: [], upkeyPressedCount: 0 }
   },
 
+  setCommandToLine: function(command) {
+    var lines = this.props.lines
+    var currentLine = React.cloneElement(lines[lines.length - 1], {content: command});
+    lines.pop();
+    lines.push(currentLine);
+    this.setProps({lines: lines}, function() {
+      this.focusCurrentLine();
+    });
+  },
+
+  currentLine: function() {
+    return this.refs['line-' + (this.props.lines.length - 1)].refs.line;
+  },
+
   focusCurrentLine: function() {
-    var currentLine = this.refs['line-' + (this.props.lines.length - 1)].refs.line
-    React.findDOMNode(currentLine).focus();
+    var domNode = React.findDOMNode(this.currentLine());
+    domNode.focus();
+    domNode.setSelectionRange(domNode.value.length, domNode.value.length);
   },
 
   handleClick: function(event) {
@@ -21,7 +36,6 @@ var Terminal = React.createClass({
     switch (event.keyCode) {
       case UPKEY:
         if (this.props.givenCommands.length > 0) {
-          console.log("Rekisteröity...");
           if (this.props.upkeyPressedCount != this.props.givenCommands.length) {
             var upkeyPressedCount = this.props.upkeyPressedCount;
             upkeyPressedCount++;
@@ -29,17 +43,17 @@ var Terminal = React.createClass({
             this.setProps({upkeyPressedCount: upkeyPressedCount}, function() {
               var commandIndex = this.props.givenCommands.length - this.props.upkeyPressedCount;
               var command = this.props.givenCommands[commandIndex];
-              console.log(command); // TODO: Put into focused input
+              this.setCommandToLine(command);
             });
           } else {
             var command = this.props.givenCommands[0];
-            console.log(command); // TODO: Put into focused input
+            this.setCommandToLine(command);
           }
         }
+
         break;
       case DOWNKEY:
         if (this.props.upkeyPressedCount > 0) {
-          console.log("Rekisteröity...");
           var upkeyPressedCount = this.props.upkeyPressedCount;
           upkeyPressedCount--;
 
@@ -51,7 +65,7 @@ var Terminal = React.createClass({
               command = ""
             }
 
-            console.log(command); // TODO: Put into focused input
+            this.setCommandToLine(command);
           });
         }
 
